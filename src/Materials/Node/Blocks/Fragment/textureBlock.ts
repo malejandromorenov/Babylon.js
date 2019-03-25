@@ -6,6 +6,7 @@ import { NodeMaterialConnectionPoint } from '../../nodeMaterialBlockConnectionPo
 import { BaseTexture } from '../../../Textures/baseTexture';
 import { AbstractMesh } from '../../../../Meshes/abstractMesh';
 import { NodeMaterial, NodeMaterialDefines } from '../../nodeMaterial';
+import { _TypeStore } from '../../../../Misc/typeStore';
 
 /**
  * Block used to read a texture from a sampler
@@ -192,3 +193,5 @@ export class TextureBlock extends NodeMaterialBlock {
         return this;
     }
 }
+
+_TypeStore.RegisteredTypes["BABYLON.TextureBlock"] = TextureBlock;

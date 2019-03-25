@@ -3,6 +3,7 @@ import { NodeMaterialBlockConnectionPointTypes } from '../nodeMaterialBlockConne
 import { NodeMaterialBuildState } from '../nodeMaterialBuildState';
 import { NodeMaterialBlockTargets } from '../nodeMaterialBlockTargets';
 import { NodeMaterialConnectionPoint } from '../nodeMaterialBlockConnectionPoint';
+import { _TypeStore } from '../../../Misc/typeStore';
 
 /**
  * Block used to transform a vector2 with a matrix
@@ -64,3 +65,5 @@ export class Vector2TransformBlock extends NodeMaterialBlock {
         return this;
     }
 }
+
+_TypeStore.RegisteredTypes["BABYLON.Vector2TransformBlock"] = Vector2TransformBlock;

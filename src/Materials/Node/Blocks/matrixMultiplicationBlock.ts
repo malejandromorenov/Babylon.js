@@ -3,6 +3,7 @@ import { NodeMaterialBlockConnectionPointTypes } from '../nodeMaterialBlockConne
 import { NodeMaterialBuildState } from '../nodeMaterialBuildState';
 import { NodeMaterialBlockTargets } from '../nodeMaterialBlockTargets';
 import { NodeMaterialConnectionPoint } from '../nodeMaterialBlockConnectionPoint';
+import { _TypeStore } from '../../../Misc/typeStore';
 
 /**
  * Block used to multiply two matrices
@@ -52,3 +53,5 @@ export class MatrixMultiplicationBlock extends NodeMaterialBlock {
         return this;
     }
 }
+
+_TypeStore.RegisteredTypes["BABYLON.MatrixMultiplicationBlock"] = MatrixMultiplicationBlock;

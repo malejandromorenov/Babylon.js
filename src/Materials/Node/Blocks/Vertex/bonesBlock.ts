@@ -9,6 +9,7 @@ import { Effect, EffectFallbacks } from '../../../effect';
 import { MaterialHelper } from '../../../materialHelper';
 import { NodeMaterialConnectionPoint } from '../../nodeMaterialBlockConnectionPoint';
 import { NodeMaterial, NodeMaterialDefines } from '../../nodeMaterial';
+import { _TypeStore } from '../../../../Misc/typeStore';
 
 /**
  * Block used to add support for vertex skinning (bones)
@@ -168,3 +169,5 @@ export class BonesBlock extends NodeMaterialBlock {
         return this;
     }
 }
+
+_TypeStore.RegisteredTypes["BABYLON.BonesBlock"] = BonesBlock;

@@ -19,6 +19,8 @@ import { NodeMaterialOptimizer } from './Optimizers/nodeMaterialOptimizer';
 import { ImageProcessingConfiguration, IImageProcessingConfigurationDefines } from '../imageProcessingConfiguration';
 import { Nullable } from '../../types';
 import { VertexBuffer } from '../../Meshes/buffer';
+import { _TypeStore } from '../../Misc/typeStore';
+import { SerializationHelper, serialize, expandToProperty } from '../../Misc/decorators';
 
 /** @hidden */
 export class NodeMaterialDefines extends MaterialDefines implements IImageProcessingConfigurationDefines {
@@ -88,10 +90,14 @@ export class NodeMaterial extends PushMaterial {
     private _textureConnectionPoints = new Array<NodeMaterialConnectionPoint>();
     private _optimizers = new Array<NodeMaterialOptimizer>();
 
+    @serialize("maxSimultaneousLights")
+    private _maxSimultaneousLights = 4;
+
     /**
-    * Defines the maximum number of lights that can be used in the material
-    */
-    public maxSimultaneousLights = 4;
+     * Defines the maximum number of lights that can be used in the material
+     */
+    @expandToProperty("_markAllSubMeshesAsLightsDirty")
+    public maxSimultaneousLights: number;
 
     /**
      * Observable raised when the material is built
@@ -571,7 +577,7 @@ export class NodeMaterial extends PushMaterial {
                 fallbacks: fallbacks,
                 onCompiled: this.onCompiled,
                 onError: this.onError,
-                indexParameters: { maxSimultaneousLights: this.maxSimultaneousLights, maxSimultaneousMorphTargets: defines.NUM_MORPH_INFLUENCERS }
+                indexParameters: { maxSimultaneousLights: this._maxSimultaneousLights, maxSimultaneousMorphTargets: defines.NUM_MORPH_INFLUENCERS }
             }, engine);
 
             if (effect) {
@@ -716,4 +722,28 @@ export class NodeMaterial extends PushMaterial {
 
         super.dispose(forceDisposeEffect, forceDisposeTextures, notBoundToMesh);
     }
+
+    /**
+     * Serializes this material in a JSON representation
+     * @returns the serialized material object
+     */
+    public serialize(): any {
+        var serializationObject = SerializationHelper.Serialize(this);
+        serializationObject.customType = "NodeMaterial";
+
+        serializationObject.vertexOutputNodes = [];
+        serializationObject.fragmentOutputNodes = [];
+
+        for (var node of this._vertexOutputNodes) {
+            serializationObject.vertexOutputNodes.push(node.serialize());
+        }
+
+        for (var node of this._fragmentOutputNodes) {
+            serializationObject.fragmentOutputNodes.push(node.serialize());
+        }
+
+        return serializationObject;
+    }
 }
+
+_TypeStore.RegisteredTypes["BABYLON.NodeMaterial"] = NodeMaterial;

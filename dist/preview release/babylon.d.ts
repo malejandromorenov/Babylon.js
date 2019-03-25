@@ -49536,9 +49536,10 @@ declare module BABYLON {
         private _cachedWorldViewProjectionMatrix;
         private _textureConnectionPoints;
         private _optimizers;
+        private _maxSimultaneousLights;
         /**
-        * Defines the maximum number of lights that can be used in the material
-        */
+         * Defines the maximum number of lights that can be used in the material
+         */
         maxSimultaneousLights: number;
         /**
          * Observable raised when the material is built
@@ -49677,6 +49678,11 @@ declare module BABYLON {
          * @param notBoundToMesh specifies if the material that is being disposed is known to be not bound to any mesh
          */
         dispose(forceDisposeEffect?: boolean, forceDisposeTextures?: boolean, notBoundToMesh?: boolean): void;
+        /**
+         * Serializes this material in a JSON representation
+         * @returns the serialized material object
+         */
+        serialize(): any;
     }
 }
 declare module BABYLON {
@@ -49834,6 +49840,11 @@ declare module BABYLON {
          * @returns the current block
          */
         build(state: NodeMaterialBuildState): this | undefined;
+        /**
+         * Serializes this block in a JSON representation
+         * @returns the serialized block object
+         */
+        serialize(): any;
     }
 }
 declare module BABYLON {

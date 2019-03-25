@@ -7,6 +7,8 @@ import { Effect, EffectFallbacks } from '../effect';
 import { AbstractMesh } from '../../Meshes/abstractMesh';
 import { Mesh } from '../../Meshes/mesh';
 import { NodeMaterial, NodeMaterialDefines } from './nodeMaterial';
+import { SerializationHelper } from '../../Misc/decorators';
+import { _TypeStore } from '../../Misc/typeStore';
 
 /**
  * Defines a block that can be used inside a node based material
@@ -417,4 +419,15 @@ export class NodeMaterialBlock {
         }
         return this;
     }
+
+    /**
+     * Serializes this block in a JSON representation
+     * @returns the serialized block object
+     */
+    public serialize(): any {
+        var serializationObject = SerializationHelper.Serialize(this);
+        serializationObject.customType = this.getClassName();
+    }
 }
+
+_TypeStore.RegisteredTypes["BABYLON.NodeMaterialBlock"] = NodeMaterialBlock;

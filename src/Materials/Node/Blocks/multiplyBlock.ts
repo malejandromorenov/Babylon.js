@@ -2,6 +2,7 @@ import { NodeMaterialBlock } from '../nodeMaterialBlock';
 import { NodeMaterialBlockConnectionPointTypes } from '../nodeMaterialBlockConnectionPointTypes';
 import { NodeMaterialBuildState } from '../nodeMaterialBuildState';
 import { NodeMaterialConnectionPoint } from '../nodeMaterialBlockConnectionPoint';
+import { _TypeStore } from '../../../Misc/typeStore';
 /**
  * Block used to multiply 2 vector4
  */
@@ -50,3 +51,5 @@ export class MultiplyBlock extends NodeMaterialBlock {
         return this;
     }
 }
+
+_TypeStore.RegisteredTypes["BABYLON.MultiplyBlock"] = MultiplyBlock;

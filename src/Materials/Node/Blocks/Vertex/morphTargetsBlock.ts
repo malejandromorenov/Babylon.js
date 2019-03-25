@@ -9,6 +9,7 @@ import { Effect } from '../../../effect';
 import { Mesh } from '../../../../Meshes/mesh';
 import { MaterialHelper } from '../../../materialHelper';
 import { VertexBuffer } from '../../../../Meshes/buffer';
+import { _TypeStore } from '../../../../Misc/typeStore';
 
 /**
  * Block used to add morph targets support to vertex shader
@@ -209,3 +210,5 @@ export class MorphTargetsBlock extends NodeMaterialBlock {
         return this;
     }
 }
+
+_TypeStore.RegisteredTypes["BABYLON.MorphTargetsBlock"] = MorphTargetsBlock;

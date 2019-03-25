@@ -2,6 +2,8 @@ import { NodeMaterialBlock } from '../nodeMaterialBlock';
 import { NodeMaterialBlockConnectionPointTypes } from '../nodeMaterialBlockConnectionPointTypes';
 import { NodeMaterialBuildState } from '../nodeMaterialBuildState';
 import { NodeMaterialConnectionPoint } from '../nodeMaterialBlockConnectionPoint';
+import { _TypeStore } from '../../../Misc/typeStore';
+
 /**
  * Block used to clamp a float
  */
@@ -48,3 +50,5 @@ export class ClampBlock extends NodeMaterialBlock {
         return this;
     }
 }
+
+_TypeStore.RegisteredTypes["BABYLON.ClampBlock"] = ClampBlock;
